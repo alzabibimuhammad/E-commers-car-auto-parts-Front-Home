@@ -1,52 +1,60 @@
-import React from 'react';
+import React from "react";
+import { Grid, Stack, TextField, Button } from "@mui/material";
+import AuthUser from "../components/AuthUser";
 
-import { Container, Row, Col, Form, FormGroup, Input } from "reactstrap";
-import Helmet from "../components/Helmet/Helmet";
-import CommonSection from "../components/UI/CommonSection";
-import AuthUser from '../components/AuthUser';
+import {showSuccesToast} from '../utiltis/toastSecces'
+import {ShowErrorToast} from '../utiltis/showErrorToast'
 
 const Login = () => {
+  const { http, setToken } = AuthUser();
 
-  const{http,setToken}= AuthUser();
-  const sendDataToApi=(formData)=>{
-    http.post('/login',{'email':formData.email,'password':formData.password,}).then((res)=>{
-      setToken(res.data.user,res.data.access_token);
-    })
-  }
+  const sendDataToApi = (formData) => {
+    http
+      .post("/login", { email: formData.email, password: formData.password })
+      .then((res) => {
+        setToken(res.data.user, res.data.access_token);
+        showSuccesToast(res.status, "Success");
+      })
+      .catch((error) => {
+        ShowErrorToast(error.response.status, error.response.data.error);
+      });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const formData = {
       email: event.target.elements.email.value,
       password: event.target.elements.password.value,
     };
     sendDataToApi(formData);
   };
+
   return (
-    <Helmet title="">
-      <CommonSection title="Login" />
-      <section>
-        <Container>
-          <Row>
-            <Col lg="7" md="7">
-              <h6 className="fw-bold mb-4">Login</h6>
-              <Form onSubmit={handleSubmit}>
-                <FormGroup className="contact__form">
-                  <Input placeholder="Email" type="email" name="email" />
-                </FormGroup>
-                <FormGroup className="contact__form">
-                  <Input type="password" name="password" placeholder="Password"/>
-                </FormGroup>
-                <button className=" contact__btn" type="submit">
-                  Login
-                </button>
-              </Form>
-            </Col>
-          </Row>
-        </Container>
-      </section>
-    </Helmet>
+    <Grid container spacing={2} padding={5} >
+      <Grid item xs={12} >
+        <h6 className="fw-bold mb-4">Login</h6>
+      </Grid>
+
+      <Grid item xs={12} sm={6} md={6}>
+        <form onSubmit={handleSubmit}>
+          
+          <Stack spacing={2}>
+            <TextField size="small" label="Email" type="email" name="email" />
+            <TextField
+              type="password"
+              size="small"
+              label="Password"
+              name="password"
+            />
+            <button className="btn">
+              Login
+            </button>
+          </Stack>
+        </form>
+      </Grid>
+    </Grid>
   );
 };
-
 
 export default Login;
