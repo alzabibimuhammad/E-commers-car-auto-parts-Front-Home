@@ -28,7 +28,7 @@ export default function AuthUser(){
     }
     
     const http=axios.create({
-        baseURL:"http://127.0.0.1:8000/api",
+        baseURL:process.env.REACT_APP_API_KEY+'/'+'api',
         headers:{
             "Content-Type":"application/json",
             "Authorization":`Bearer${JSON.parse(sessionStorage.getItem('token'))}`
@@ -39,7 +39,8 @@ export default function AuthUser(){
         token,
         user,
         getToken,
-        http
+        http,
+        getUser
     }
 }
 

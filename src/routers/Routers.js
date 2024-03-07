@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "../pages/Home";
 import About from "../pages/About";
-import PartListing from "../pages/PartListing";
+import Parts from "../pages/parts";
 import PartDetails from "../pages/PartDetails";
 import NotFound from "../pages/NotFound";
 import Contact from "../pages/Contact";
@@ -10,7 +10,7 @@ import Register from "../pages/register";
 import Login from "../pages/login";
 import UserProfile from "../pages/userProfile";
 import EditProfile from "../pages/editProfile";
-import Cart from "../pages/Cart";
+import Cart from "../pages/cart/Cart";
 import Purchases from "../pages/Purchases";
 import AddPart from "../pages/AddPart";
 import SellerParts from "../pages/SellerParts";
@@ -34,10 +34,17 @@ const Routers = () => {
   const{http}= AuthUser();
   const [user, setUser] = useState([]);
 
-  useState(() => {
+  useEffect(() => {
     http.post('/me')
     .then((res)=>{setUser(res.data)})
-  });
+    .catch((error) => {
+      if(error.response && error.response.status == 401){
+        sessionStorage.removeItem('user')
+        sessionStorage.removeItem('token')
+      }
+    });
+   
+  },[]);
 
   const isLoggedIn = Boolean(sessionStorage.getItem('token'));
 
@@ -48,7 +55,7 @@ const Routers = () => {
       <Route path="/" element={<Navigate to="/home" />} />
       <Route path="/home" element={<Home />} />
       <Route path="/about" element={<About />} />
-      <Route path="/parts" element={<PartListing />} />
+      <Route path="/parts" element={<Parts />} />
 
       <Route path="/contact" element={<Contact />} />
       <Route path="*" element={<NotFound />} />
