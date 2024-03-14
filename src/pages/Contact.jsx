@@ -24,7 +24,6 @@ const socialLinks = [
 
 const Contact = () => {
   const sendDataToApi = (formData) => {
-    console.log(formData)
     fetch("http://127.0.0.1:8000/api/SaveContactUs", {
       method: "post",
       headers: {
@@ -36,15 +35,12 @@ const Contact = () => {
       .then(response => {
         if (response.ok) {
           // Handle successful API response
-          console.log("Data sent successfully");
         } else {
           // Handle API error
-          console.error("Failed to send data to API");
         }
       })
       .catch(error => {
         // Handle network error
-        console.error("Failed to send data to API", error);
       });
   };
   

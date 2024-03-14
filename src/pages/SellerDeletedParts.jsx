@@ -39,13 +39,10 @@ const SellerDeletedParts = () => {
             if(!Response.ok){
               throw new Error('Something went wrong')
             }
-            console.log('cool');
           }).then((posts) => {})
           .catch((e) => {
-            console.log('cool');
     })
     setPosts(prevData => prevData.filter(row => row.id !== id));
-    // console.log(id);
     };
 
     const UnDeleteAllParts=()=>{

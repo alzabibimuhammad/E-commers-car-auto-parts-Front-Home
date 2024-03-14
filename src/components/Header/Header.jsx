@@ -14,7 +14,6 @@ import { enc, SHA256 } from 'crypto-js';
 import AuthUser from "../AuthUser";
 
 const expert=()=>{
-  console.log('iam study experts sys')
 }
 
 const navLinks = [
@@ -70,8 +69,6 @@ const{http}= AuthUser();
     })
   },[]);
   const isSeller = utype === '2';
-  console.log('ss',isSeller)
-  console.log(isLoggedIn)
 
 
   const navigate = useNavigate();

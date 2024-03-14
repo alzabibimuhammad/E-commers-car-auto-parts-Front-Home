@@ -63,12 +63,10 @@ const PartCard = ({Data,type}) => {
                 AddToCartApi(Amount[index])
             }
             else{
-                console.log('ddds');
 
                 navigate('/login')
             }
         
-        console.log(Amount[index]);
 
     }
     const handleDelete=partID=>{

@@ -8,8 +8,8 @@ import NotFound from "../pages/NotFound";
 import Contact from "../pages/Contact";
 import Register from "../pages/register";
 import Login from "../pages/login";
-import UserProfile from "../pages/userProfile";
-import EditProfile from "../pages/editProfile";
+import Profile from "../pages/profile";
+import EditProfile from "../pages/profile/edit";
 import Cart from "../pages/cart/Cart";
 import Purchases from "../pages/Purchases";
 import AddPart from "../pages/AddPart";
@@ -78,7 +78,7 @@ const Routers = () => {
             
             
     {isLoggedIn===true &&      
-      <Route path="/userProfile" element={<UserProfile />}  />
+      <Route path="/userProfile" element={<Profile />}  />
     }
             
     {isLoggedIn===true &&      

@@ -23,14 +23,12 @@ const BecomeDriverSection = () => {
       setPosts(res.data)
     })
   },[]);
-  console.log("become::"+posts.name)
   const sendDataToApi = (formData) => {
     fetch('http://127.0.0.1:8000/api/post-registration?name='+formData.name+"&email="+formData.email+"&phone="+formData.phone+"&address="+formData.address+"&password="+formData.password+"&utype="+formData.utype+"&image="+formData.image,{
       method:'POST'
     })
       .then((response) => response.json())
       .catch((error) => console.log(error));
-    console.log(formData.utype)
     };
   const BecomeASeller = ()=>{
     
@@ -47,7 +45,6 @@ const BecomeDriverSection = () => {
   }
   const isSeller = posts.utype==='2';
   
-  console.log("isLLL:"+isSeller)
   if(sessionStorage.getItem('token') === null)
   return (
     <section className="become__driver">

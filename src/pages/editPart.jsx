@@ -65,7 +65,6 @@ const EditPart = () => {
         .then((data) => data.json())
         .then((data) => setPart(data)); // Slice the data array to contain only the first 4 items
     }, []);
-    console.log('parts'+parts.image);
     const sendDataToApi = (formData) => {
         const data = new FormData();
         data.append('part_id', formData.part_id);
