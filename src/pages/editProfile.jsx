@@ -36,8 +36,6 @@ const EditProfile = () => {
     setSelectedImage(file);
   };
 
-  console.log("edit"+user.id)
-  console.log("sss"+posts.image)
 
 
   

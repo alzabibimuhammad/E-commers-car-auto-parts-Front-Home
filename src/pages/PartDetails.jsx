@@ -56,7 +56,6 @@ const PartDetails = () => {
     })
     .then((data) => {
       // Handle the successful response here
-      console.log(data)
 
       displayResponse(data);
     })

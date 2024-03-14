@@ -31,7 +31,6 @@ const SearchPart = () => {
   }, []);
 
   const sendDataToApi = (formData) => {
-    console.log(formData)
     const url = "http://127.0.0.1:8000/api/AddToCart?"+"customer_id="+formData.customer_id + "&part_id="+formData.part_id+"&amount="+formData.amount
     fetch( url, { method: 'get'})
     .then((Response) => {
