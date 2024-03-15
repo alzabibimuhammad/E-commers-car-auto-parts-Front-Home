@@ -74,9 +74,9 @@ const PartCard = ({Data,type}) => {
     }
 
     return (
-        <Grid margin={{ sm: 0, md: 0, xs: 0 }} spacing={1} sx={{ overflowX:'hidden' }} container>
+        <Grid margin={{ sm: 0, md: 0, xs: 0 }}  spacing={1} sx={{ overflowX:'hidden' }} container>
             {Data?.map((part,index)=>(
-                <Grid item sm={3} xs={11} md={3}  >
+                <Grid item sm={3} xs={11} md={3} marginBottom={2}  >
                 <Card sx={{borderRadius:'12px' ,backgroundColor: 'rgb(250,250,250)', width: '100%', height: '470px' }}>
                     <CardContent>
 
