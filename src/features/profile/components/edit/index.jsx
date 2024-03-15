@@ -28,6 +28,7 @@ const EditProfileCard = ({ Data }) => {
   const [visible,setVisible] = useState(false)
   
   const [image, setImage] = useState(null);
+  const [imageApi, setImageApi] = useState(null);
   
   const {mutate:EditProfileApi} =EditProfile() 
 
@@ -42,8 +43,14 @@ const EditProfileCard = ({ Data }) => {
     image:image?image:Data?.image
   };
   const handleSubmit = (values) => {
-    EditProfileApi(values)
-  };
+      if (image) {
+        values.image = image;
+    } else {
+        values.image = Data.image;
+    }
+    EditProfileApi(values);
+};
+
   const formik = useFormik({
     initialValues: defaultValues,
     onSubmit: (values) => {
@@ -52,14 +59,12 @@ const EditProfileCard = ({ Data }) => {
   });
   const handleImageChange=event=>{
     const file = event.target.files[0];
+
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImage(reader.result);
-        formik.setValues({
-          ...formik.values,
-          image: reader.result // Update the image field in formik values
-        });
+        setImageApi(file)
       };
       reader.readAsDataURL(file);
     }
@@ -94,7 +99,6 @@ const EditProfileCard = ({ Data }) => {
                 <TextField
                   id="imageInput"
                   type="file"
-                  accept="image/*"
                   style={{ display: 'none' }}
                   onChange={handleImageChange}
                 />

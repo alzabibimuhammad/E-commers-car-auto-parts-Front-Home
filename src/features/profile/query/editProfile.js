@@ -10,11 +10,12 @@ const EditProfile = () => {
   return useMutation({
     mutationFn:EditProfileApi,
     onSuccess: (data) => {
-      queryClient.invalidateQueries("Cart");
+      queryClient.invalidateQueries("Profile");
       showSuccesToast("","success")
     },
-    onError:(data) => {
-      ShowErrorToast( data?.response?.data[0])
+    onError:_ => {
+      queryClient.invalidateQueries("Profile");
+      ShowErrorToast("Change user name")
     }
   });
 }
