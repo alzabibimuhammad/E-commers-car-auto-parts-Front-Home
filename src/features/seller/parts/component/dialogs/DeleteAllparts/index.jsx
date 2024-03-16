@@ -4,13 +4,15 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import DeleteAllParts from '../../../hooks/query/DeleteAllParts';
+import { UserContext } from '../../../../../../components/Layout/Layout';
 
-export default function AlertDialogDeleteAllParts({open,setDeleteOpen,user_id}) {
+export default function AlertDialogDeleteAllParts({open,setDeleteOpen}) {
 
     const { mutate: DeleteAllPartsApi } = DeleteAllParts()
+    const user = React.useContext(UserContext);
 
     const handleDelete = _ =>{
-        DeleteAllPartsApi(user_id)
+        DeleteAllPartsApi(user?.id)
         handleClose()
     }
 

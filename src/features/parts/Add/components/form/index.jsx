@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { Form } from "reactstrap";
 
-import React from "react";
+import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import AuthUser from "../../../../../components/AuthUser";
 
@@ -19,6 +19,7 @@ import GetCategoriesApi from "../../api/GetCategoriesApi";
 import GetModelsApi from "../../api/GetModelsApi";
 import GetProfile from "../../../../profile/query/getProfile";
 import AddPart from "../../api/AddPart";
+import { UserContext } from "../../../../../components/Layout/Layout";
 
 const AddPartForm = () => {
     const initialValues = {
@@ -34,8 +35,8 @@ const AddPartForm = () => {
     const [posts, setPosts] = useState([]);
     const [category, setcategory] = useState([]);
     
-    const {data} = GetProfile()
-    const user = data?.data
+    const user = useContext(UserContext);
+
     useEffect(() => {
 
         GetCategoriesApi().then(data => setcategory(data?.data))

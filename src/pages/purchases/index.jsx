@@ -1,15 +1,15 @@
     import { Box, CircularProgress, Typography, useTheme } from "@mui/material";
-    import { useState, useEffect } from "react";
-    import GetProfile from "../../features/profile/query/getProfile";
+    import { useState, useEffect, useContext } from "react";
     import PurchaseTable from "../../features/purchases/component/DataGrid";
     import GetAllPurchase from "../../features/purchases/hooks/query/GetAllpurchase";
     import GetTotalMonyApi from "../../features/purchases/api/GetTotalMonyApi";
+import { UserContext } from "../../components/Layout/Layout";
     const Purchases = () => {
 
         const [totalMony, settotalMony] = useState()
 
-        const { data } = GetProfile()
-        const user = data?.data    
+        const user = useContext(UserContext);
+        
         const {data:purchase} = GetAllPurchase(user?.id)
         const posts = purchase?.data
 
