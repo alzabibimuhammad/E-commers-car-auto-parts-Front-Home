@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
-import GetCartApi from '../api/getProfileAPI'
+import GetProfileApi from '../api/getProfileAPI'
 
 const GetProfile = () => {
-  const query = useQuery({ queryKey: ['Profile'], queryFn: GetCartApi })
+  const query = useQuery({ queryKey: ['Profile'], queryFn: GetProfileApi })
 
   return query
 }

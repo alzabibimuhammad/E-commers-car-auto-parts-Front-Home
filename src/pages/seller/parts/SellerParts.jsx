@@ -1,20 +1,21 @@
-import React from 'react'
-import SellerPartsTable from '../features/seller/parts/component/DataGrid'
-import GetProfile from '../features/profile/query/getProfile'
-import GetAllSellerParts from '../features/seller/parts/hooks/query/GetAllSellerParts'
+import React, { useContext } from 'react'
+import SellerPartsTable from '../../../features/seller/parts/component/DataGrid'
+import GetAllSellerParts from '../../../features/seller/parts/hooks/query/GetAllSellerParts'
 import { Box, CircularProgress } from '@mui/material'
+import { UserContext } from '../../../components/Layout/Layout'
 
 export default function SellerParts() {
-  const { data } = GetProfile()
-  const user = data?.data
+
+  const user = useContext(UserContext);
 
   const { data: Data } = GetAllSellerParts(user?.id)
   const rows = Data?.data
 
+
   return (
     <>
       {rows ?
-        <SellerPartsTable rows={rows} user_id={user?.id} />
+        <SellerPartsTable rows={rows} />
         :
         <Box sx={{ height: '50vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
           <CircularProgress />

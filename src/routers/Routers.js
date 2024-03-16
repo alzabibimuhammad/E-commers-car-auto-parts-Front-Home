@@ -13,12 +13,11 @@ import EditProfile from "../pages/profile/edit";
 import Cart from "../pages/cart/Cart";
 import Purchases from "../pages/purchases";
 import AddPart from "../pages/parts/add";
-import SellerParts from "../pages/SellerParts";
-import SellerDeletedParts from "../pages/SellerDeletedParts";
+import SellerParts from "../pages/seller/parts/SellerParts";
 import ProposeCategory from "../pages/ProposeCategory";
 import ProposeCarModel from "../pages/ProposeCarModel";
 import ProposeCarType from "../pages/ProposeCarType";
-import SalesForSeller from "../pages/SalesForSeller";
+import SalesForSeller from "../pages/seller/sales";
 import EditPart from "../pages/editPart";
 import SearchPart from "../pages/searchPart";
 import SearchPart1 from "../pages/searchPart1";
@@ -28,6 +27,7 @@ import { useNavigate } from 'react-router-dom';
 import ExpertSystem from "../pages/ExpertSystem";
 
 import Report from "../pages/Report";
+import SellerDeletedParts from "../pages/seller/parts/deletedParts";
 const Routers = () => {
   const navigate = useNavigate();
 
