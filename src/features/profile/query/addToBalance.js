@@ -1,27 +1,24 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import EditProfileApi from '../api/edit';
 import { showSuccesToast } from '../../../utiltis/toastSecces';
 import { ShowErrorToast } from '../../../utiltis/showErrorToast';
-import { useNavigate } from 'react-router-dom';
+import AddToBalanceApi from '../api/addToBalanceApi';
 
-const EditProfile = () => {
+const AddToBalanceQuery = () => {
   const queryClient = useQueryClient();
-  const navigate = useNavigate()
 
   return useMutation({
-    mutationFn:EditProfileApi,
+    mutationFn:AddToBalanceApi,
     onSuccess: (data) => {
       queryClient.invalidateQueries("Profile");
       showSuccesToast("","success")
-      navigate('/userProfile')
     },
     onError:_ => {
       queryClient.invalidateQueries("Profile");
-      ShowErrorToast("Change user name")
+      ShowErrorToast("Error")
     }
   });
 }
 
-export default EditProfile
+export default AddToBalanceQuery
 

@@ -31,11 +31,11 @@ const SearchPart1 = () => {
   
 
   var [posts, setPosts] = useState([]);
-  useState(() => {
+  useEffect(() => {
     fetch("http://127.0.0.1:8000/api/searchPartHeader?term="+sessionStorage.getItem('term'))
       .then((data) => data.json())
       .then((data) => setPosts(data)); // Slice the data array to contain only the first 4 items
-  });
+  },[]);
 
   const sendDataToApi = (formData) => {
     const url = "http://127.0.0.1:8000/api/AddToCart?"+"customer_id="+formData.customer_id + "&part_id="+formData.part_id+"&amount="+formData.amount
@@ -128,7 +128,7 @@ const SearchPart1 = () => {
           </span>
           </div>
           )}  
-        {posts.map((part) =>
+        {posts?.map((part) =>
         <Col lg="4" md="4" sm="6" className="mb-5">
           <div className="car__item">
             <div ><img src={`http://localhost:8000/${part.image}`} style={{ width:'380px',height:'250px' }} /></div>

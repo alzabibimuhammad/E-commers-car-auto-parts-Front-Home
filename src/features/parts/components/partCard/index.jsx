@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 
 import AuthUser from "../../../../components/AuthUser";
-import { Box, Button, Card, CardContent, Container, Grid, IconButton, Stack, TextField, Typography } from "@mui/material";
+import { Avatar, Box, Button, Card, CardContent, Container, Grid, IconButton, Stack, TextField, Typography } from "@mui/material";
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 
@@ -80,10 +80,10 @@ const PartCard = ({Data,type}) => {
                 <Card sx={{borderRadius:'12px' ,backgroundColor: 'rgb(250,250,250)', width: '100%', height: '470px' }}>
                     <CardContent>
 
-                        <Stack spacing={1} >
+                        <Stack spacing={0.5} >
                             <Box sx={{ width: '100%', height: '100%', marginLeft: '2%', display: 'flex' }}>
                                 <Box sx={{ width:'100%',height:'100%' }} display={'flex'} justifyContent={'center'} >
-                                    <img style={{ width: '250px', height: '200px    ' }} src={process.env.REACT_APP_API_KEY+'/'+part.image} alt="ss" />
+                                    <Avatar style={{borderRadius:'5px', width: '250px', height: '200px    ' }} src={process.env.REACT_APP_API_KEY+'/'+part.image} alt="No image" />
                                 </Box>
                                 <Box sx={{ position:'relative',left:10 }}>
                                     <IconButton

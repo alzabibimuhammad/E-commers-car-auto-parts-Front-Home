@@ -1,27 +1,24 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import EditProfileApi from '../api/edit';
 import { showSuccesToast } from '../../../utiltis/toastSecces';
 import { ShowErrorToast } from '../../../utiltis/showErrorToast';
-import { useNavigate } from 'react-router-dom';
+import BecomeAsellerApi from '../api/BecomeASellerApi';
 
-const EditProfile = () => {
+const BecomeAsellerQuery = () => {
   const queryClient = useQueryClient();
-  const navigate = useNavigate()
 
   return useMutation({
-    mutationFn:EditProfileApi,
+    mutationFn:BecomeAsellerApi,
     onSuccess: (data) => {
       queryClient.invalidateQueries("Profile");
       showSuccesToast("","success")
-      navigate('/userProfile')
     },
-    onError:_ => {
+    onError:error => {
       queryClient.invalidateQueries("Profile");
-      ShowErrorToast("Change user name")
+      ShowErrorToast("Error",error?.response?.data)
     }
   });
 }
 
-export default EditProfile
+export default BecomeAsellerQuery
 

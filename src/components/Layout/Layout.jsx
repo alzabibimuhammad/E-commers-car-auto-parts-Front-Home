@@ -14,20 +14,23 @@ const Layout = () => {
   const [queryClient] = React.useState(() => new QueryClient());
   
   const [user , setUser] = useState()
+
+  const isLoggedIn = Boolean(sessionStorage.token);
+
   
   useEffect(() => {
-    GetProfileApi().then(data => setUser(data?.data))
-  }, []);
+    if(isLoggedIn)
+      GetProfileApi().then(data => setUser(data?.data))
+  }, [isLoggedIn]);
 
 
   return (
     <Fragment>
+        <UserContext.Provider value={user} >  
       <Header />
       <div>
         <QueryClientProvider client={queryClient}>
-        <UserContext.Provider value={user} >  
             <Routers />
-        </UserContext.Provider>
         </QueryClientProvider>
         <ReactHotToast>
           <Toaster
@@ -35,11 +38,12 @@ const Layout = () => {
               className: "react-hot-toast",
               style: { color: "#fff" },
             }}
-          />
+            />
         </ReactHotToast>
       </div>
 
       <Footer />
+            </UserContext.Provider>
     </Fragment>
   );
 };
