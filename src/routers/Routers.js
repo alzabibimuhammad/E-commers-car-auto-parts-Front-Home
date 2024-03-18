@@ -12,7 +12,6 @@ import Profile from "../pages/profile";
 import EditProfile from "../pages/profile/edit";
 import Cart from "../pages/cart/Cart";
 import Purchases from "../pages/purchases";
-import AddPart from "../pages/parts/add";
 import SellerParts from "../pages/seller/parts/SellerParts";
 import ProposeCategory from "../pages/ProposeCategory";
 import ProposeCarModel from "../pages/ProposeCarModel";
@@ -84,9 +83,7 @@ const Routers = () => {
     {isLoggedIn===true &&      
       <Route path="/EditProfile" element={<EditProfile />}  />
     }
-      { isSeller===true && 
-        <Route path="/AddPart" element={<AddPart/>} />
-      }
+   
       { isSeller===true&& 
       <Route path="/ProposeCategory" element={<ProposeCategory />}  />
       }

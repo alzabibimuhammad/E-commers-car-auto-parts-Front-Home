@@ -20,6 +20,7 @@ import EditProfile from "../../query/editProfile";
 
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { Link } from "react-router-dom";
 
 const EditProfileCard = ({ Data }) => {
 
@@ -43,11 +44,6 @@ const EditProfileCard = ({ Data }) => {
     image:image?image:Data?.image
   };
   const handleSubmit = (values) => {
-      if (image) {
-        values.image = image;
-    } else {
-        values.image = Data.image;
-    }
     EditProfileApi(values);
 };
 
@@ -64,7 +60,7 @@ const EditProfileCard = ({ Data }) => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImage(reader.result);
-        setImageApi(file)
+        formik.setFieldValue('image',file)
       };
       reader.readAsDataURL(file);
     }
@@ -116,30 +112,36 @@ const EditProfileCard = ({ Data }) => {
                   <Divider />
                 </Stack>
 
-                <Grid container>
-                  <Grid item sm={4} xs={4} md={4}>
+                <Grid container spacing={{ sm:1,md:1,lg:1,xs:0 }} >
+                  <Grid item sm={4} xs={12} md={4}>
                     <Typography>Name</Typography>
                     <TextField
                       size="small"
                       name="name"
+                      fullWidth
+
                       onChange={formik.handleChange}
                       value={formik.values.name}
                     />
                   </Grid>
-                  <Grid item sm={4} xs={4} md={4}>
+                  <Grid item sm={4} xs={12} md={4}>
                     <Typography>Email</Typography>
                     <TextField
                       size="small"
+                      fullWidth
+
                       name="email"
                       onChange={formik.handleChange}
                       value={formik.values.email}
                     />
                   </Grid>
-                  <Grid item sm={4} xs={4} md={4}>
+                  <Grid item sm={4} xs={12} md={4}>
                     <Typography>Password</Typography>
                     <TextField
                       type={ visible ? "text":"password"}
                       size="small"
+                      fullWidth
+
                       name="password"
                       onChange={formik.handleChange}
                       InputProps={{
@@ -166,30 +168,33 @@ const EditProfileCard = ({ Data }) => {
                   <Typography>Accommodation</Typography>
                   <Divider />
                 </Stack>
-                <Grid container>
-                  <Grid item sm={4} xs={4} md={4}>
+                <Grid container spacing={{ sm:1,md:1,lg:1,xs:0 }}  >
+                  <Grid item sm={4} xs={12} md={4}>
                     <Typography>Address</Typography>
                     <TextField
                       size="small"
+                      fullWidth
                       name="address"
                       onChange={formik.handleChange}
                       value={formik.values.address}
                     />
                   </Grid>
-                  <Grid item sm={4} xs={4} md={4}>
+                  <Grid item sm={4} xs={12} md={4}>
                     <Typography>Phone</Typography>
                     <TextField
                       size="small"
+                      fullWidth
                       name="phone"
                       onChange={formik.handleChange}
                       value={formik.values.phone}
                     />
                   </Grid>
 
-                  <Grid item sm={4} xs={4} md={4}>
+                  <Grid item sm={4} xs={12} md={4}>
                     <Typography>Balance</Typography>
                     <TextField
                       size="small"
+                      fullWidth
                       name="balance"
                       onChange={formik.handleChange}
                       value={formik.values.financial_balance}
@@ -198,6 +203,7 @@ const EditProfileCard = ({ Data }) => {
                   </Grid>
                 </Grid>
               </Stack>
+              <Stack spacing={1} sx={{marginTop:{sm:'30px',md:'30px',lg:'30px',xs:'20px'}}} direction={'row'} >
               <Button
                 type="submit"
                 sx={{
@@ -208,7 +214,17 @@ const EditProfileCard = ({ Data }) => {
               >
                 Edit
               </Button>
-          
+              <Button        sx={{
+                  backgroundColor: "orange",
+                  color: "#fff",
+                  ":hover": { backgroundColor: "orange", color: "#fff" },
+                }} >
+                <Link to={'/userProfile'} style={{ textDecoration:'none',color:'#fff' }} >
+                 Cancle
+                </Link>
+                
+                </Button>
+              </Stack>
             </CardContent>
           </Card>
         </Grid>

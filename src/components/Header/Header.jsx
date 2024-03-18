@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { useState, useEffect } from 'react';
 import { Container, Row, Col, Button } from "reactstrap";
 import { Link, NavLink } from "react-router-dom"; 
@@ -12,6 +12,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import { enc, SHA256 } from 'crypto-js';
 import AuthUser from "../AuthUser";
+import { UserContext } from "../Layout/Layout";
 
 const expert=()=>{
 }
@@ -61,14 +62,10 @@ const{http}= AuthUser();
   
   const isLoggedIn = Boolean(sessionStorage.getItem('token')) ;
   
+  const user = useContext(UserContext)
 
 
-  useEffect(()=>{
-    http.post('/me').then((res)=>{
-      setUtype(res.data.utype)
-    })
-  },[]);
-  const isSeller = utype === '2';
+  const isSeller = user?.utype === '2';
 
 
   const navigate = useNavigate();
@@ -126,8 +123,7 @@ const SearchTerm=()=>{
                 Purchases</Dropdown.Item>
                 <Dropdown.Item href="/Cart" style={{color:'black'}} hover="profile"> <AiFillHdd /> 
                 Cart</Dropdown.Item>
-                <Dropdown.Item href="/AddPart" style={{color:'black'}} hover="profile"> <AiFillHdd /> 
-                Add Part</Dropdown.Item>
+    
                 <Dropdown.Item href="/SellerParts" style={{color:'black'}} hover="SellerParts"> <AiFillHdd /> 
                 My Parts</Dropdown.Item>
                 <Dropdown.Item href="/SellerDeletedParts" style={{color:'black'}} hover="SellerParts"> <AiFillHdd /> 
@@ -220,7 +216,7 @@ const SearchTerm=()=>{
 
       {/* ========== main navigation =========== */}
 
-      <div className="main__navbar">
+      <div className="main__navbar" style={{padding:20}} >
         <Container>
           <div className="navigation__wrapper d-flex align-items-center justify-content-between">
             <span className="mobile__menu">
@@ -242,15 +238,6 @@ const SearchTerm=()=>{
               </div>
             </div>
 
-            <div className="nav__right">
-            <div className="search__box" >
-              <input type="text"  className="searchPlace" placeholder="Search Parts(Part name,Price,Seller,Model,Category)" name="term"  onChange={(e) => setSearchTerm(e.target.value)} />
-              <span onClick={SearchTerm} >
-                <i className="ri-search-line"></i>
-              </span>
-            </div>
-
-          </div>
           </div>
         </Container>
       </div>

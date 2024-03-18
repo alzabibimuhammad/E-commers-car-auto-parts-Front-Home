@@ -2,11 +2,17 @@ import { Avatar, Button, Card, CardContent, Container, Divider, Grid, Stack, Typ
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import AlertDialogDelete from '../delete'
+import AddToBalanceDialog from '../addTobalance'
+import BecomeAseller from '../becomeAseller'
 
 export default function ProfileCard({ Data }) {
     const naveigate = useNavigate()
 
     const [deleteOpen, setDeleteOpen] = useState(false)
+    const [isBalance, setIsBalance] = useState(false)
+    const [bseller, setBseller] = useState(false)
+
+    const isSeller = Data?.utype ==='2'; 
 
     const handleEdit = _ => {
         naveigate('/EditProfile')
@@ -58,8 +64,13 @@ export default function ProfileCard({ Data }) {
                                     <Typography>{Data?.address}</Typography>
                                     <Stack width={'31%'} spacing={1} marginTop={5} >
                                         <Button onClick={() => setDeleteOpen(true)} sx={{ backgroundColor: 'red', color: '#fff', ':hover': { backgroundColor: 'red', color: '#fff' } }}  >Delete Profile</Button>
-                                        <Button sx={{ backgroundColor: '#000D6B', color: '#fff', ':hover': { backgroundColor: '#000D6B', color: '#fff' } }}  >Become A Seller</Button>
-                                    </Stack>
+                                        {!isSeller?
+                                            <Button onClick={_=>setBseller(true)} sx={{ backgroundColor: '#000D6B', color: '#fff', ':hover': { backgroundColor: '#000D6B', color: '#fff' } }}  >Become A Seller</Button>
+                                        :
+                                            <Button onClick={_=>setIsBalance(true)} sx={{ backgroundColor: '#000D6B', color: '#fff', ':hover': { backgroundColor: '#000D6B', color: '#fff' } }}  >Add to Balance</Button>
+                                        
+                                        }
+                                        </Stack>
                                 </Grid>
                                 <Grid item sm={6} xs={6} md={6}>
                                     <Typography>Phone</Typography>
@@ -74,6 +85,9 @@ export default function ProfileCard({ Data }) {
                 </Card>
             </Grid>
             {deleteOpen && <AlertDialogDelete open={deleteOpen} setDeleteOpen={setDeleteOpen} />}
+            {isBalance && <AddToBalanceDialog open={isBalance} setIsopen={setIsBalance} Data={Data} />}
+            {bseller && <BecomeAseller open={bseller} setIsopen={setBseller} Data={Data} />}
+            
         </Grid>
     )
 }
