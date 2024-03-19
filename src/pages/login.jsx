@@ -13,10 +13,10 @@ const Login = () => {
       .post("/login", { email: formData.email, password: formData.password })
       .then((res) => {
         setToken(res.data.user, res.data.access_token);
-        showSuccesToast(res.status, "Success");
+        showSuccesToast( "Success");
       })
       .catch((error) => {
-        ShowErrorToast(error.response.status, error.response.data.error);
+        ShowErrorToast(error.response.data.error);
       });
   };
 
@@ -47,9 +47,9 @@ const Login = () => {
               label="Password"
               name="password"
             />
-            <button className="btn">
+            <Button type="submit"  sx={{ backgroundColor:'#000D6B',color:"#fff",':hover':{backgroundColor:'#000D6B',color:"#fff"} }} >
               Login
-            </button>
+            </Button>
           </Stack>
         </form>
       </Grid>

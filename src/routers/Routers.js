@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "../pages/Home";
 import About from "../pages/About";
 import Parts from "../pages/parts";
-import PartDetails from "../pages/PartDetails";
+import PartDetails from "../pages/parts/details";
 import NotFound from "../pages/NotFound";
 import Contact from "../pages/Contact";
 import Register from "../pages/register";
@@ -17,15 +17,11 @@ import ProposeCategory from "../pages/ProposeCategory";
 import ProposeCarModel from "../pages/ProposeCarModel";
 import ProposeCarType from "../pages/ProposeCarType";
 import SalesForSeller from "../pages/seller/sales";
-import EditPart from "../pages/editPart";
-import SearchPart from "../pages/searchPart";
-import SearchPart1 from "../pages/searchPart1";
 import AuthUser from "../components/AuthUser";
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ExpertSystem from "../pages/ExpertSystem";
 
-import Report from "../pages/Report";
 import SellerDeletedParts from "../pages/seller/parts/deletedParts";
 const Routers = () => {
   const navigate = useNavigate();
@@ -54,15 +50,16 @@ const Routers = () => {
       <Route path="/" element={<Navigate to="/home" />} />
       <Route path="/home" element={<Home />} />
       <Route path="/about" element={<About />} />
-      <Route path="/parts" element={<Parts />} />
 
       <Route path="/contact" element={<Contact />} />
       <Route path="*" element={<NotFound />} />
       <Route path="/Login" element={<Login />} />
       <Route path="/Register" element={<Register />}  />
-      <Route path="/SearchPart" element={<SearchPart />}  />
-      <Route path="/SearchPart1" element={<SearchPart1 />}  />
-      <Route path="/PartDetails" element={<PartDetails />}  />
+      
+      <Route path="/parts" element={<Parts />}/>
+      <Route path="/parts/:id" element={<PartDetails />} />
+
+
       <Route path="/expertSystem" element={< ExpertSystem />}/>
       
 
@@ -97,9 +94,7 @@ const Routers = () => {
       <Route path="/SalesForSeller" element={<SalesForSeller />}  />
       }
       
-      { isSeller===true && 
-      <Route path="/EditPart" element={<EditPart />}  />
-      }
+
       { isSeller===true && 
       <Route path="/ProposeCarType" element={<ProposeCarType />}  />
       }
@@ -113,10 +108,7 @@ const Routers = () => {
 
       }
 
-      {
-        localStorage.getItem('report_seller_id') &&
-        <Route path="/report" element={<Report />}  />
-      }
+   
     </Routes>
   );
 };

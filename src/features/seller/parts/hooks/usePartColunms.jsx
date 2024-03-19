@@ -5,13 +5,14 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import InfoIcon from '@mui/icons-material/Info';
 import AlertDialogDeletePart from '../component/dialogs/DeletePart';
 import DrawerEditPart from '../component/drawerEdit';
+import { useNavigate } from 'react-router-dom';
 
 export default function usePartColunms() {
 
   const [isDelete,setIsDelete] = useState(false)
   const [isEdit,setIsEdit] = useState(false)
   const [idPart,setIdPart] = useState()
-
+  const navigate = useNavigate()
   const handleDelete = params=>{
     setIdPart(params.row.id)
     setIsDelete(true)
@@ -19,6 +20,9 @@ export default function usePartColunms() {
   const handleEdit =params=>{
     setIdPart(params)
     setIsEdit(true)
+  }
+  const handleDetails=id=>{
+    navigate(`/parts/${id}`)
   }
 
   return useMemo(_=>
@@ -97,8 +101,9 @@ export default function usePartColunms() {
                     <Box onClick={()=>{handleDelete(params)}}>
                     <DeleteForeverIcon  fontSize='small' sx={{ cursor:'pointer',color:'red' }}/>
                     </Box>
-                    <InfoIcon fontSize='small' sx={{ cursor:'pointer' }}/>
-
+                    <Box onClick={()=>{handleDetails(params?.row?.id)}}>
+                      <InfoIcon fontSize='small' sx={{ cursor:'pointer' }}/>
+                    </Box>
 
                 </Stack>
                 {isDelete&&<AlertDialogDeletePart open={isDelete} setDeleteOpen={setIsDelete} id={idPart}  />}

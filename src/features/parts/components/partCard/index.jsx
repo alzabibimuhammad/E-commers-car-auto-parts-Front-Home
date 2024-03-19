@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import AuthUser from "../../../../components/AuthUser";
 import { Avatar, Box, Button, Card, CardContent, Container, Grid, IconButton, Stack, TextField, Typography } from "@mui/material";
@@ -72,65 +72,24 @@ const PartCard = ({Data,type}) => {
     const handleDelete=partID=>{
         DeleteFromCartApi(partID)
     }
+    const handleDetails=id => {
+        navigate(`${id}`)
+        
+    }
 
     return (
         <Grid margin={{ sm: 0, md: 0, xs: 0 }}  spacing={1} sx={{ overflowX:'hidden' }} container>
             {Data?.map((part,index)=>(
-                <Grid item sm={3} xs={11} md={3} marginBottom={2}  >
+                <Grid key={index} item sm={3} xs={11} md={3} marginBottom={2}  >
                 <Card sx={{borderRadius:'12px' ,backgroundColor: 'rgb(250,250,250)', width: '100%', height: '470px' }}>
                     <CardContent>
 
                         <Stack spacing={0.5} >
                             <Box sx={{ width: '100%', height: '100%', marginLeft: '2%', display: 'flex' }}>
-                                <Box sx={{ width:'100%',height:'100%' }} display={'flex'} justifyContent={'center'} >
+                                <Box onClick={_=>handleDetails(part?.id)} sx={{ cursor:'pointer',width:'100%',height:'100%' }} display={'flex'} justifyContent={'center'} >
                                     <Avatar style={{borderRadius:'5px', width: '250px', height: '200px    ' }} src={process.env.REACT_APP_API_KEY+'/'+part.image} alt="No image" />
                                 </Box>
-                                <Box sx={{ position:'relative',left:10 }}>
-                                    <IconButton
-                                        aria-label='more'
-                                        id='long-button'
-                                        aria-controls={open ? 'long-menu' : undefined}
-                                        aria-expanded={open ? 'true' : undefined}
-                                        aria-haspopup='true'
-                                        sx={{ padding: 0, margin: 0 }}
-                                        onClick={event => handleClick(event)}
-                                    >
-                                        <MoreVertIcon />
-                                    </IconButton>
-                                    <Menu
-                                        id='long-menu'
-                                        MenuListProps={{
-                                            'aria-labelledby': 'long-button'
-                                        }}
-                                        anchorEl={anchorEl}
-                                        open={open}
-                                        onClose={handleCloseAnchor}
-                                        PaperProps={{
-                                            style: {
-                                                maxHeight: 162 * 4.5,
-                                                width: '208px',
-                                                boxShadow: 'none'
-                                            }
-                                        }}
-                                    >
-                                        <MenuItem sx={{ padding: '0', color: '#3F4458' }} >
-                                            <Box style={{ textDecoration: 'none' }}>
-                                                <IconButton>
-                                                    <InfoIcon variant='contained' sx={{ color: '#3F4458' }} size='small' />
-                                                </IconButton>
-                                                <span style={{ color: '#3F4458' }}>Details</span>
-                                            </Box>
-                                        </MenuItem>
-                                        <MenuItem sx={{ padding: '0', color: '#3F4458' }} >
-                                            <Box style={{ textDecoration: 'none' }}>
-                                                <IconButton>
-                                                    <ReportIcon variant='contained' sx={{ color: '#3F4458' }} size='small' />
-                                                </IconButton>
-                                                <span style={{ color: '#3F4458' }}>Report</span>
-                                            </Box>
-                                        </MenuItem>
-                                    </Menu>
-                                </Box>
+                         
                             </Box>
                             <Box sx={{ width: '100%', marginTop: '10px' }} display={'flex'} justifyContent={'center'} >
                                 <Stack>
