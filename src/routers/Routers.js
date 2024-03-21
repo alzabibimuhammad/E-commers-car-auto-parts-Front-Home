@@ -13,102 +13,73 @@ import EditProfile from "../pages/profile/edit";
 import Cart from "../pages/cart/Cart";
 import Purchases from "../pages/purchases";
 import SellerParts from "../pages/seller/parts/SellerParts";
-import ProposeCategory from "../pages/ProposeCategory";
-import ProposeCarModel from "../pages/ProposeCarModel";
+import Propose from "../pages/seller/propose";
 import ProposeCarType from "../pages/ProposeCarType";
 import SalesForSeller from "../pages/seller/sales";
 import AuthUser from "../components/AuthUser";
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import ExpertSystem from "../pages/ExpertSystem";
 
 import SellerDeletedParts from "../pages/seller/parts/deletedParts";
 const Routers = () => {
   const navigate = useNavigate();
 
-  const{http}= AuthUser();
+  const { http } = AuthUser();
   const [user, setUser] = useState([]);
 
   useEffect(() => {
-    http.post('/me')
-    .then((res)=>{setUser(res.data)})
-    .catch((error) => {
-      if(error.response && error.response.status == 401){
-        sessionStorage.removeItem('user')
-        sessionStorage.removeItem('token')
-      }
-    });
-   
-  },[]);
+    http
+      .post("/me")
+      .then((res) => {
+        setUser(res.data);
+      })
+      .catch((error) => {
+        if (error.response && error.response.status == 401) {
+          sessionStorage.removeItem("user");
+          sessionStorage.removeItem("token");
+        }
+      });
+  }, []);
 
-  const isLoggedIn = Boolean(sessionStorage.getItem('token'));
+  const isLoggedIn = Boolean(sessionStorage.getItem("token"));
 
-  const isSeller=user.utype==='2';
+  const isSeller = user.utype === "2";
 
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/home" />} />
       <Route path="/home" element={<Home />} />
       <Route path="/about" element={<About />} />
-
       <Route path="/contact" element={<Contact />} />
       <Route path="*" element={<NotFound />} />
       <Route path="/Login" element={<Login />} />
-      <Route path="/Register" element={<Register />}  />
-      
-      <Route path="/parts" element={<Parts />}/>
+      <Route path="/Register" element={<Register />} />
+      <Route path="/parts" element={<Parts />} />
       <Route path="/parts/:id" element={<PartDetails />} />
+      <Route path="/expertSystem" element={<ExpertSystem />} />
 
+      {isLoggedIn && (
+        <>
+          <Route path="/Purchases" element={<Purchases />} />
+          <Route path="/Cart" element={<Cart />} />
+          <Route path="/userProfile" element={<Profile />} />
+          <Route path="/EditProfile" element={<EditProfile />} />
 
-      <Route path="/expertSystem" element={< ExpertSystem />}/>
-      
+          {isSeller && (
+            <>
+              <Route path="/propose" element={<Propose />} />
+              <Route path="/SalesForSeller" element={<SalesForSeller />} />
 
-      
-    {isLoggedIn===true &&      
-      <Route path="/Purchases" element={<Purchases />}  />
-    }
-    
-     {isLoggedIn === true && 
-      <Route path="/Cart" element={<Cart />} />
-    } 
-            
-            
-    {isLoggedIn===true &&      
-      <Route path="/userProfile" element={<Profile />}  />
-    }
-            
-    {isLoggedIn===true &&      
-      <Route path="/EditProfile" element={<EditProfile />}  />
-    }
-   
-      { isSeller===true&& 
-      <Route path="/ProposeCategory" element={<ProposeCategory />}  />
-      }
-      { isSeller===true && 
-      <Route path="/ProposeCarModel" element={<ProposeCarModel />}  />
-      }
-      { isSeller===true && 
-      <Route path="/ProposeCarType" element={<ProposeCarType />}  />
-      }
-      { isSeller===true && 
-      <Route path="/SalesForSeller" element={<SalesForSeller />}  />
-      }
-      
-
-      { isSeller===true && 
-      <Route path="/ProposeCarType" element={<ProposeCarType />}  />
-      }
-
-      { isSeller===true && 
-      <Route path="/SellerParts" element={<SellerParts />}  />
-
-      }
-      { isSeller===true && 
-      <Route path="/SellerDeletedParts" element={<SellerDeletedParts />}  />
-
-      }
-
-   
+              <Route path="/SellerParts" element={<SellerParts />} />
+              <Route
+                path="/SellerDeletedParts"
+                element={<SellerDeletedParts />}
+              />
+            </>
+          )}
+        </>
+      )}
     </Routes>
   );
 };
