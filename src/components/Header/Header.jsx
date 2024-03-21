@@ -48,13 +48,6 @@ const navLinks = [
 const Header = () => {
 const{http}= AuthUser();
 
-  const [utype, setUtype] = useState([])
-  const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
-  const [searchTerm, setSearchTerm] = useState(false);
-
-  const toggleAdvancedSearch = () => {
-    setShowAdvancedSearch(!showAdvancedSearch);
-  };
 
   const menuRef = useRef(null);
 
@@ -78,11 +71,7 @@ const{http}= AuthUser();
     navigate('/home');
     
   }
-const SearchTerm=()=>{
-  sessionStorage.setItem('term',searchTerm);
-  navigate('/SearchPart1')
-  window.location.reload()
-}
+
   return (
     <header className="header">
       <style>
@@ -103,7 +92,7 @@ const SearchTerm=()=>{
 
             <Col lg="6" md="6" sm="6">
             <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
-                  {isLoggedIn && isSeller===false ?  (
+                  {isLoggedIn && isSeller && user ===false ?  (
               // Render links for logged-in users
                   <DropdownButton  title={<IoIosColorFilter />} variant="dark">
                   <Dropdown.Item href="/userProfile" style={{color:'black'}} hover="profile"> <AiFillHdd /> 
@@ -115,7 +104,7 @@ const SearchTerm=()=>{
                   <Dropdown.Item onClick={logout} style={{color:'black'}} hover="signout"><GoSignOut/> 
                   Sign out </Dropdown.Item>
                 </DropdownButton>
-              ) :isLoggedIn && isSeller===true ? (
+              ) :isLoggedIn && isSeller===true && user ? (
                 <DropdownButton  title={<IoIosColorFilter />} variant="dark">
                 <Dropdown.Item href="/userProfile" style={{color:'black'}} hover="profile"> <AiFillHdd /> 
                 Profile</Dropdown.Item>
@@ -128,17 +117,20 @@ const SearchTerm=()=>{
                 My Parts</Dropdown.Item>
                 <Dropdown.Item href="/SellerDeletedParts" style={{color:'black'}} hover="SellerParts"> <AiFillHdd /> 
                 Deleted Parts</Dropdown.Item>
-                <Dropdown.Item href="/ProposeCategory" style={{color:'black'}} hover="ProposeCategory"> <AiFillHdd /> 
-                Propose Category</Dropdown.Item>
-                <Dropdown.Item href="/ProposeCarModel" style={{color:'black'}} hover="ProposeCarModel"> <AiFillHdd /> 
-                Propose Car Model</Dropdown.Item>
-                <Dropdown.Item href="/ProposeCarType" style={{color:'black'}} hover="ProposeCarType"> <AiFillHdd /> 
-                Propose Car Type</Dropdown.Item>
+              
                 <Dropdown.Item href="/SalesForSeller" style={{color:'black'}} hover="SalesForSeller"> <AiFillHdd /> 
                 Sales For Seller</Dropdown.Item>
+             
+                <Dropdown.Item href="/propose" style={{color:'black'}} hover="ProposeCategory"> <AiFillHdd /> 
+                Propose</Dropdown.Item>
+                {/* <Dropdown.Item href="/ProposeCarModel" style={{color:'black'}} hover="ProposeCarModel"> <AiFillHdd /> 
+                Propose Car Model</Dropdown.Item>
+                <Dropdown.Item href="/ProposeCarType" style={{color:'black'}} hover="ProposeCarType"> <AiFillHdd /> 
+                Propose Car Type</Dropdown.Item> */}
                 <Dropdown.Item onClick={logout} style={{color:'black'}} hover="signout"><GoSignOut/> 
-                Sign out </Dropdown.Item>
+                   Sign out </Dropdown.Item>
                 </DropdownButton>
+   
 
               ) : (
                 <>
