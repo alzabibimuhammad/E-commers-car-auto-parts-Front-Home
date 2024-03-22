@@ -9,6 +9,8 @@ import BecomeDriverSection from "../components/UI/BecomeDriverSection";
 import driveImg from "../assets/all-images/drive.jpg";
 import OurMembers from "../components/UI/OurMembers";
 import "../styles/about.css";
+import { Box, Stack, Typography } from "@mui/material";
+import pdf from "../assets/all-images/MuhammadAlzabibi2024.pdf"
 
 const About = () => {
 
@@ -33,14 +35,18 @@ const About = () => {
                 </h2>
 
                 <div className=" d-flex align-items-center gap-3 mt-4">
-                  <span className="fs-4">
-                    <i className="ri-phone-line"></i>
-                  </span>
+
 
                   <div>
                     <h6 className="section__subtitle">Need Any Help ?</h6>
                     <h4>Muhammad Alzabibi</h4>
-                    <h4>+963932392808</h4>
+                    <h6>Full Stack developer React js & MUI & Laravel </h6>
+                    <Box display={'flex'} alignItems={'center'} >
+
+                      <i className="ri-phone-line"></i>
+                      <h6>+963-930-8888-19</h6>
+                    </Box>
+
                   </div>
                 </div>
               </div>
@@ -48,19 +54,48 @@ const About = () => {
           </Row>
         </Container>
       </section>
-      <BecomeDriverSection />
+      {/* <Box width={'100%'} display={'flex'} justifyContent={'center'} >
+            <Stack>
 
-      <section>
-        <Container>
-          <Row>
-            <Col lg="12" className="mb-5 text-center">
               <h6 className="section__subtitle">Experts</h6>
-              <h2 className="section__title">Our Members</h2>
-            </Col>
-            <OurMembers />
-          </Row>
-        </Container>
-      </section>
+              <h2 className="section__title">Our Team</h2>
+            </Stack>
+</Box> */}
+        <Container>
+
+      <Stack spacing={1} width={'100%'} direction={{ sm: 'row', md: 'row', lg: 'row', xs: 'column' }} mb={10}  >
+
+        <OurMembers />
+
+        <Stack width={'100%'}>
+
+
+
+          <Box width={'100%'} height={'100%'} >
+            <Box width={'100%'} height={'100%'}  >
+              <Box sx={{ display:{sm:'block',md:'block',lg:'block',xs:'none'}, position: 'absolute', top: '1440px', right: "300px" }} >
+
+                <Typography fontSize={25} p={0} m={0} color={'#fff  '} >Resume</Typography>
+              </Box>
+              <iframe
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  border: 'none',
+                  borderRadius: 'inherit'
+                }}
+                src={pdf}
+              />
+
+
+            </Box>
+          </Box>
+
+        </Stack>
+
+      </Stack>
+      </Container>
+
     </Helmet>
   );
 };

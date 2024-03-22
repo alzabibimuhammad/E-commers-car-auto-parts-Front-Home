@@ -19,9 +19,7 @@ const AboutSection = ({ aboutClass }) => {
             <div className="about__section-content">
               <h4 className="section__subtitle">About Us</h4>
               <h2 className="section__title">Welcome to Auto Parts Shop</h2>
-              <p className="section__description">
-                Welcome
-              </p>
+             
             </div>
           </Col>
           <Col lg="6" md="6">
