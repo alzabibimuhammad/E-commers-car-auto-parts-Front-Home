@@ -45,7 +45,7 @@ const BecomeDriverSection = () => {
   }
   const isSeller = posts.utype==='2';
   
-  if(sessionStorage.getItem('token') === null)
+  if(!sessionStorage.token)
   return (
     <section className="become__driver">
       <Container>

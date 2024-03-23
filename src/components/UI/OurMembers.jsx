@@ -9,42 +9,15 @@ import ava04 from "../../assets/all-images/ava-4.jpg";
 
 const OUR__MEMBERS = [
   {
-    name: "Mhd Zabibi",
-    experience: "5 years of experience",
+    name: "Muhammad Alzabibi",
+    experience: "1 years of experience",
     fbUrl: "https://www.facebook.com/profile.php?id=100009074204136&mibextid=ZbWKwL",
     instUrl: "https://www.instagram.com/p/CpVNOpyM1mrgxyTu1uZ8HoDWCQyDVnQBRQyduA0/?igshid=NTc4MTIwNjQ2YQ%3D%3D",
     twitUrl: "#",
     linkedinUrl: "#",
     imgUrl: ava02,
   },
-  {
-    name: "Rashid Zain",
-    experience: "5 years of experience",
-    fbUrl: "#",
-    instUrl: "#",
-    twitUrl: "#",
-    linkedinUrl: "#",
-    imgUrl: ava01,
-  },
 
-  {
-    name: "Mudar Jumaa",
-    experience: "5 years of experience",
-    fbUrl: "#",
-    instUrl: "#",
-    twitUrl: "#",
-    linkedinUrl: "#",
-    imgUrl: ava03,
-  },
-  {
-    name: "Wisam Khamash",
-    experience: "5 years of experience",
-    fbUrl: "#",
-    instUrl: "#",
-    twitUrl: "#",
-    linkedinUrl: "#",
-    imgUrl: ava04,
-  },
 ];
 
 const OurMembers = () => {

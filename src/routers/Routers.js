@@ -14,14 +14,16 @@ import Cart from "../pages/cart/Cart";
 import Purchases from "../pages/purchases";
 import SellerParts from "../pages/seller/parts/SellerParts";
 import Propose from "../pages/seller/propose";
-import ProposeCarType from "../pages/ProposeCarType";
 import SalesForSeller from "../pages/seller/sales";
 import AuthUser from "../components/AuthUser";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ExpertSystem from "../pages/ExpertSystem";
 
+
 import SellerDeletedParts from "../pages/seller/parts/deletedParts";
+
+
 const Routers = () => {
   const navigate = useNavigate();
 
